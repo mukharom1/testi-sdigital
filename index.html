@@ -86,35 +86,32 @@
 
   <script>
     // Folder tempat gambar
-    const folder = "imageaja";
+    const folder =    
+</body><script>
+  // Ambil daftar gambar dari API Vercel
+  fetch("/api/list")
+    .then(res => res.json())
+    .then(files => {
+      let gallery = document.getElementById("gallery");
+      gallery.innerHTML = ""; // hapus text default
 
-    // List ekstensi gambar yang didukung
-    const ekstensi = [".jpg", ".jpeg", ".png", ".gif", ".webp"];
+      if (files.length === 0) {
+        gallery.innerText = "⚠ Tidak ada gambar ditemukan.";
+        return;
+      }
 
-    // Fungsi untuk generate otomatis
-    fetch(folder)
-      .then(res => res.text())
-      .then(text => {
-        let parser = new DOMParser();
-        let html = parser.parseFromString(text, "text/html");
-        let files = [...html.querySelectorAll("a")].map(a => a.getAttribute("href"));
-        files = files.filter(f => ekstensi.some(ext => f.toLowerCase().endsWith(ext)));
-
-        let gallery = document.getElementById("gallery");
-        files.forEach(file => {
-          let img = document.createElement("img");
-          img.src = folder + file;
-          img.width = 350;
-          img.height = 530;
-          img.alt = "Testimoni";
-          gallery.appendChild(img);
-        });
-      })
-      .catch(err => {
-        console.error("Gagal load gambar:", err);
-        document.getElementById("gallery").innerText = "⚠ Tidak bisa memuat gambar otomatis.";
+      files.forEach(file => {
+        let img = document.createElement("img");
+        img.src = "imageaja" + file; // ambil gambar dari public/imageaja
+        img.width = 350;
+        img.height = 530;
+        img.alt = "Testimoni";
+        gallery.appendChild(img);
       });
-  </script>
-
-</body>
+    })
+    .catch(err => {
+      console.error("Gagal load gambar:", err);
+      document.getElementById("gallery").innerText = "⚠ Tidak bisa memuat gambar otomatis.";
+    });
+</script>
 </html>
