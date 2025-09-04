@@ -84,34 +84,30 @@
     <h6>© S.DIGITAL STORE - RONZZ - since 2025</h6>
   </footer>
 
-  <script>
-    // Folder tempat gambar
-    const folder =    
-</body><script>
-  // Ambil daftar gambar dari API Vercel
-  fetch("/api/list")
-    .then(res => res.json())
-    .then(files => {
-      let gallery = document.getElementById("gallery");
-      gallery.innerHTML = ""; // hapus text default
+ <div id="gallery"></div>
 
-      if (files.length === 0) {
-        gallery.innerText = "⚠ Tidak ada gambar ditemukan.";
-        return;
-      }
+<script>
+  const gallery = document.getElementById("gallery");
+  const folder = "imageaja/";
+  const total = 70; // jumlah maksimal foto
 
-      files.forEach(file => {
-        let img = document.createElement("img");
-        img.src = "imageaja" + file; // ambil gambar dari public/imageaja
-        img.width = 350;
-        img.height = 530;
-        img.alt = "Testimoni";
-        gallery.appendChild(img);
-      });
-    })
-    .catch(err => {
-      console.error("Gagal load gambar:", err);
-      document.getElementById("gallery").innerText = "⚠ Tidak bisa memuat gambar otomatis.";
-    });
-</script>
+  for (let i = 1; i <= total; i++) {
+    const img = document.createElement("img");
+
+    // coba jpg dulu
+    img.src = `${folder}foto${i}.jpg`;
+
+    // kalau jpg gagal load, ganti jadi png
+    img.onerror = function() {
+      this.onerror = null; // biar nggak infinite loop
+      this.src = `${folder}foto${i}.png`;
+    };
+
+    img.width = 350;
+    img.height = 530;
+    img.alt = `Testimoni ${i}`;
+    gallery.appendChild(img);
+  }
+</script>    
+</body>
 </html>
