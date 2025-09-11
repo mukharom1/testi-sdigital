@@ -5,3 +5,7 @@ for path in ~/storage/*; do
         echo "📂 Sudah dipindahkan ke ~/testi-sdigital/"
     fi
 done
+
+
+// kode keluarkan isi file aja 
+mv ~/testi-sdigital/imageaja/aja/* ~/testi-sdigital/imageaja/
