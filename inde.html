@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TESTI - S.DIGITAL STORE</title>
+  <style>
+    body {
+      background: linear-gradient(to left, aqua, yellow);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3rem;
+      font-style: italic;
+      display: inline-block;
+      padding: 10px 20px;
+      box-shadow: 5px 5px 15px rgba(0,0,255,0.5);
+      background: linear-gradient(to right, lightgreen, cyan, yellow, lightgreen, yellow, cyan);
+      border-radius: 10px;
+    }
+    h2 {
+      color: black;
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    h3, h4, a {
+      text-decoration: none;
+      margin: 10px 0;
+    }
+    h4 {
+      font-size: 18px;
+      background: #49c9;
+      padding: 5px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    img {
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .bulat {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    footer {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Judul -->
+  <marquee scrollamount="25"><h1>TESTIMONI S.DIGITAL</h1></marquee>
+
+  <!-- Foto profil + kontak -->
+  <img src="https://files.catbox.moe/m4ooge.jpg" class="bulat" alt="Profil">
+  <br>
+  <a href="http://wa.me/+6285606405362"><h3>➩ WA : +6285606405362</h3></a>
+  <a href="https://chat.whatsapp.com/BZeOGKiJMyLHaCoUEKxi2j"><h2>➩ LINK GRUP? PENCET SINI √</h2></a>
+
+  <!-- Deskripsi -->
+  <h4>S.DIGITAL STORE MENYEDIAKAN LAYANAN APK PREMIUM MURAH & TOP UP GAME</h4>
+  <h2>𓊈 ☟☟☟ TESTIMONI ☟☟☟ 𓊉</h2>
+
+  <marquee scrollamount="5"><h2>==============================================</h2></marquee>
+  <h2>𝗧𝗘𝗦𝗧𝗜𝗠𝗢𝗡𝗜 TRANSAKSI</h2>
+  <marquee scrollamount="5" direction="right"><h2>==============================================</h2></marquee>
+
+  <!-- Tempat gambar otomatis -->
+  <div id="gallery"></div>
+
+  <marquee scrollamount="5"><h2>================================================================</h2></marquee>
+  <h2>ORDER? CHAT ADMIN 6285606405362</h2>
+  <a href="http://wa.me/+6285606405362?text=bang+mau+order"><h2>ᴋʟɪᴋ ᴅɪsɪɴɪ</h2></a>
+
+  <marquee scrollamount="10"><h5>➣ TERIMAKASIH UDAH LIHAT SAMPAI BAWAH ❖</h5></marquee>
+  <footer>
+    <h6>© S.DIGITAL STORE - RONZZ - since 2025</h6>
+  </footer>
+
+ <div id="gallery"></div>
+
+<script>
+  const gallery = document.getElementById("gallery");
+  const folder = "imageaja/"; // letak folder gambar
+  const total = 63; // jumlah maksimal foto
+
+  for (let i = total; i >= 1; i--) {
+    const img = document.createElement("img");
+
+    // coba jpg dulu
+    img.src = `${folder}foto${i}.jpg`;
+
+    // kalau jpg gagal load, ganti jadi png
+    img.onerror = function() {
+      this.onerror = null; // biar nggak infinite loop
+      this.src = `${folder}foto${i}.png`;
+    };
+
+    img.width = 353;
+    img.height = 550;
+    img.alt = `Testimoni ${i} S.DIGITAL STORE`;
+
+    gallery.appendChild(img);
+  }
+</script>
+</body>
+</html>
