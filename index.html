@@ -123,6 +123,43 @@ body.cyberpunk {
       text-decoration: none;
       transition: color 0.3s;
     }
+#loading-screen {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:9999;
+  background:#000;
+}
+
+#loading-screen .blur-bg {
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: url('https://files.catbox.moe/m4ooge.jpg') center/cover no-repeat;
+  filter: blur(192px);
+  z-index:0;
+}
+
+.loading-logo {
+  width:200px;
+  height:200px;
+  border-radius:20px;
+  z-index:1;
+  box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+#loading-text {
+  color:white;
+  font-size:24px;
+  font-weight:bold;
+  margin-top:20px;
+  z-index:1;
+  font-family:sans-serif;
+}
     .social-icons a.whatsapp { color: #25D366; }
     .social-icons a.instagram { color: #E1306C; }
     .social-icons a.facebook { color: #1877F2; }
@@ -131,6 +168,11 @@ body.cyberpunk {
 </head>
 <body>
   <header>
+<div id="loading-screen">
+  <div class="blur-bg"></div>
+  <img src="https://files.catbox.moe/m4ooge.jpg" alt="Toko" class="loading-logo">
+  <div id="loading-text"></div>
+</div>
     <marquee scrollamount="15"><h1 style="color: #1877F2;">TESTIMONI S.DIGITAL STORE</h1></marquee>
   </header>
 
@@ -172,7 +214,21 @@ body.cyberpunk {
       audio.play();
     }
   }, { once: true });
+const loadingText = document.getElementById('loading-text');
+let dots = 0;
 
+// Animasi titik Loading...
+const interval = setInterval(() => {
+  dots = (dots + 1) % 4; // 0–5 titik
+  loadingText.textContent = 'Loading ' + '. '.repeat(dots);
+}, 500);
+
+// Simulasi loading 3 detik, lalu tampilkan website
+setTimeout(() => {
+  clearInterval(interval);
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+}, 5000); // ubah sesuai kebutuhan
 async function checkBattery() {
   if (!navigator.getBattery) {
     document.getElementById("battery-info").textContent = "Battery API tidak didukung di browser ini.";
